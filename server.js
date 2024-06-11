@@ -12,7 +12,7 @@ const corsOptions = {
     origin: [
         process.env.FRONTEND_URL,
         "http://localhost:3000",
-        "https://test-desol-frontend-aweo.vercel.app/"
+        "https://test-desol-frontend-aweo.vercel.app/",
         "*",
     ],
     credentials: true,
@@ -24,11 +24,16 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get('/', (req, res) => res.send(`Server is running on port ${port}`));
+//Routes go here
+app.get('/', (req, res) => {
+    res.send({ title: 'BLOGS APP' });
+})
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+// app.get('/', (req, res) => res.send(`Server is running on port ${port}`));
+
+// app.listen(port, () => {
+//     console.log(`Server is running on port ${port}`);
+// });
 
 app.use("/api/v1/user/", require("./routes/userRoutes"));
 app.use("/api/v1/car/", require("./routes/carRoutes"));
