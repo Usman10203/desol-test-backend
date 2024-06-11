@@ -31,9 +31,9 @@ app.get('/', (req, res) => {
 
 // app.get('/', (req, res) => res.send(`Server is running on port ${port}`));
 
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-// });
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
 
 app.use("/api/v1/user/", require("./routes/userRoutes"));
 app.use("/api/v1/car/", require("./routes/carRoutes"));
