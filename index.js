@@ -9,16 +9,16 @@ const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3000;
 
-const corsOptions = {
-    origin: '*',
-    credentials: true,
-    methods: 'GET,POST,DELETE,UPDATE,PUT,PATCH',
-    optionsSuccessStatus: 200,
-    preflightContinue: false,
-    allowedHeaders: 'Content-Type,Authorization',
-};
+// const corsOptions = {
+//     origin: '*',
+//     credentials: true,
+//     methods: 'GET,POST,DELETE,UPDATE,PUT,PATCH',
+//     optionsSuccessStatus: 200,
+//     preflightContinue: false,
+//     allowedHeaders: 'Content-Type,Authorization',
+// };
 
-app.options('*', cors(corsOptions))
+app.options(cors());
 
 app.get('/', (req, res) => {
     res.send({ title: 'Backend APP is Runnig' });
