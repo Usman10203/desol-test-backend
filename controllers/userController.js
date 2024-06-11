@@ -5,7 +5,6 @@ module.exports = {
     Login: async (req, res) => {
         try {
             const records = req.body;
-            console.log('records', records);
 
             if (!records.email || !records.password) {
                 return res.send({ status: 400, success: false, message: "Please provide email and password" });

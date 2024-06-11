@@ -47,6 +47,7 @@ module.exports = {
         try {
             const urls = [];
             const files = req.files;
+            console.log(`files at be`, files);
 
             if (files && files.length > 0) {
                 for (const file of files) {
