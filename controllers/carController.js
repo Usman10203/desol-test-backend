@@ -49,15 +49,16 @@ module.exports = {
             const files = req.files;
             console.log(`files at be`, files);
 
-            if (files && files.length > 0) {
-                for (const file of files) {
-                    const { path } = file;
-                    const newPath = await uploader(path);
-                    urls.push(newPath);
-                    fs.unlinkSync(path);
-                }
-            }
-
+            // if (files && files.length > 0) {
+            //     for (const file of files) {
+            //         const { path } = file;
+            //         const newPath = await uploader(path);
+            //         urls.push(newPath);
+            //         fs.unlinkSync(path);
+            //     }
+            // }
+            const picturePaths = files.map(file => file.path);
+            console.log(`picturePaths`, picturePaths);
 
             const newCar = new Modals.car({
                 userId,
@@ -65,7 +66,7 @@ module.exports = {
                 price,
                 phone,
                 city,
-                pictures: urls,
+                pictures: picturePaths,
             });
 
             await newCar.save();
