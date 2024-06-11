@@ -10,11 +10,7 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: [
-        "http://localhost:3000",
-        "https://test-desol-frontend-aweo.vercel.app",
-        "https://test-desol-frontend-aweo.vercel.app/"
-    ],
+    origin: '*',
     credentials: true,
     methods: 'GET,POST,DELETE,UPDATE,PUT,PATCH',
     optionsSuccessStatus: 200,
@@ -22,7 +18,7 @@ const corsOptions = {
     allowedHeaders: 'Content-Type,Authorization',
 };
 
-app.use(cors(corsOptions));
+app.options('*', cors(corsOptions))
 
 app.get('/', (req, res) => {
     res.send({ title: 'Backend APP is Runnig' });
