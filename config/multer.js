@@ -1,6 +1,6 @@
 const multer = require("multer");
-
-const DIR = './uploads'
+const path = require('path');
+const DIR = path.join(__dirname, '../uploads');
 
 /* 
 Using uploads directory for the storage configuration of the files 
