@@ -12,6 +12,7 @@ const corsOptions = {
     origin: [
         process.env.FRONTEND_URL,
         "http://localhost:3000",
+        "https://test-desol-frontend-aweo.vercel.app",
         "https://test-desol-frontend-aweo.vercel.app/",
         "*",
     ],
@@ -24,9 +25,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-//Routes go here
 app.get('/', (req, res) => {
-    res.send({ title: 'BLOGS APP' });
+    res.send({ title: 'Backend APP is Runnig' });
 })
 
 // app.get('/', (req, res) => res.send(`Server is running on port ${port}`));
