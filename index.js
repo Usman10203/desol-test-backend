@@ -18,7 +18,23 @@ const port = process.env.PORT || 3000;
 //     allowedHeaders: 'Content-Type,Authorization',
 // };
 
-app.options(cors());
+const allowedOrigins = [
+    "http://localhost:3000",  // Local development
+    "https://test-desol-frontend-aweo.vercel.app", // Deployed frontend origin 1
+    "https://test-desol-frontend-aweo.vercel.app/" // Deployed frontend origin 2 (with trailing slash)
+];
+
+const corsOptions = {
+    origin: allowedOrigins,
+    credentials: true, // Allow cookies for authenticated requests (if applicable)
+    methods: 'GET,POST,DELETE,PUT,PATCH',
+    allowedHeaders: 'Content-Type,Authorization',
+    optionsSuccessStatus: 200, // Required for preflight requests
+    preflightContinue: false // Pass through preflight requests (optional)
+};
+
+app.use(cors(corsOptions));
+//app.options(cors());
 
 app.get('/', (req, res) => {
     res.send({ title: 'Backend APP is Runnig' });
