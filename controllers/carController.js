@@ -35,12 +35,21 @@ module.exports = {
 
     addCar: async (req, res) => {
         const { userId, car_model, price, phone, city } = req.body;
-        const uploader = async (path) => {
+        // const uploader = async (path) => {
+        //     return new Promise((resolve, reject) => {
+        //         cloudinary.uploader.upload(path, (error, result) => {
+        //             if (error) return reject(error);
+        //             resolve(result.secure_url);
+        //         });
+        //     });
+        // };
+        const uploadFromBuffer = (buffer) => {
             return new Promise((resolve, reject) => {
-                cloudinary.uploader.upload(path, (error, result) => {
+                const stream = cloudinary.uploader.upload_stream((error, result) => {
                     if (error) return reject(error);
                     resolve(result.secure_url);
                 });
+                stream.end(buffer);
             });
         };
 
@@ -49,16 +58,21 @@ module.exports = {
             const files = req.files;
             console.log(`files at be`, files);
 
-            // if (files && files.length > 0) {
-            //     for (const file of files) {
-            //         const { path } = file;
-            //         const newPath = await uploader(path);
-            //         urls.push(newPath);
-            //         fs.unlinkSync(path);
-            //     }
-            // }
-            const picturePaths = files.map(file => file.path);
-            console.log(`picturePaths`, picturePaths);
+            if (files !== '' || files !== null) {
+                for (const file of files) {
+                    const { buffer } = file;
+                    const newPath = await uploadFromBuffer(buffer);
+                    urls.push(newPath);
+                }
+                // for (const file of files) {
+                //     const { path } = file;
+                //     const newPath = await uploader(path);
+                //     urls.push(newPath);
+                //     fs.unlinkSync(path);
+                // }
+            }
+            // const picturePaths = files.map(file => file.path);
+            // console.log(`picturePaths`, picturePaths);
 
             const newCar = new Modals.car({
                 userId,
@@ -66,7 +80,7 @@ module.exports = {
                 price,
                 phone,
                 city,
-                pictures: picturePaths,
+                pictures: urls,
             });
 
             await newCar.save();
