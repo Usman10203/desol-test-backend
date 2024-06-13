@@ -8,7 +8,6 @@ const schema = mongoose.Schema(
         userId: {
             type: String,
             required: true,
-            default: "66670be4046816c69510979b",
             ref: "user",
         },
         car_model: {

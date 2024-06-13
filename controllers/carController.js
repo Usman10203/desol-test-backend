@@ -6,11 +6,6 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-
-const fs = require('fs');
-console.log('CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME);
-console.log('CLOUDINARY_API_KEY:', process.env.CLOUDINARY_API_KEY);
-console.log('CLOUDINARY_API_SECRET:', process.env.CLOUDINARY_API_SECRET);
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -71,9 +66,6 @@ module.exports = {
                 //     fs.unlinkSync(path);
                 // }
             }
-            // const picturePaths = files.map(file => file.path);
-            // console.log(`picturePaths`, picturePaths);
-
             const newCar = new Modals.car({
                 userId,
                 car_model,
